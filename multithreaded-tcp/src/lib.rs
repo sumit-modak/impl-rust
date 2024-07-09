@@ -55,6 +55,8 @@ impl ThreadPool {
 
 impl Drop for ThreadPool {
     fn drop(&mut self) {
+        println!("Shutting down.");
+
         for _ in &self.workers {
             self.sender.send(Message::Terminate).unwrap();
         }

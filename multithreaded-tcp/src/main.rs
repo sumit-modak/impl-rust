@@ -10,17 +10,22 @@ fn main() {
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
     let pool = ThreadPool::new(4);
 
-    for stream in listener.incoming().take(2) {
-        if let Ok(stream) = stream {
-            pool.execute(|| {
-                handle_connection(stream);
-            });
-        } else {
-            println!("Connection failed.")
-        }
-    }
+    // for stream in listener.incoming().take(2) {
+    //     if let Ok(stream) = stream {
+    //         pool.execute(|| {
+    //             handle_connection(stream);
+    //         });
+    //     } else {
+    //         println!("Connection failed.")
+    //     }
+    // }
 
-    println!("Shutting down.");
+    loop {
+        let (stream, _) = listener.accept().unwrap();
+        pool.execute(|| {
+            handle_connection(stream);
+        });
+    }
 }
 
 fn handle_connection(mut stream: TcpStream) {
