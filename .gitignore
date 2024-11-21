@@ -1,2 +1,3 @@
 multithreaded-tcp/target/
 asynchronous-tcp/target/
+singlethreaded-udp/target/
