@@ -2,3 +2,4 @@ multithreaded-tcp/target/
 asynchronous-tcp/target/
 singlethreaded-udp/target/
 cell-apis/target/
+mpsc-channel/target/
